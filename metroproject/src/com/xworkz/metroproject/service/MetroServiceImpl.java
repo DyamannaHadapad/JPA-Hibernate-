@@ -1,5 +1,7 @@
 package com.xworkz.metroproject.service;
 
+import java.util.Optional;
+
 import com.xworkz.metroproject.entity.MetroEntity;
 import com.xworkz.metroproject.repository.MetroRepository;
 
@@ -78,6 +80,14 @@ public class MetroServiceImpl implements MetroService {
 		}
 
 		return true;
+	}
+
+	@Override
+	public Optional<MetroEntity> findById(int id) {
+		if (id > 0) {
+			return this.repository.findById(id);
+		}
+		return Optional.empty();
 	}
 
 }
