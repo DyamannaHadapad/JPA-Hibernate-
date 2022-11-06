@@ -1,4 +1,4 @@
-package com.xworkz.hostel.entity;
+package com.xworkz.human.entiy;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,18 +13,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "hostel_info") 
-public class HostelEntity {
+@Table(name = "human")
+public class HumanEntity {
 	@Id
 	@Column(name = "id")
 	private int id;
-	@Column(name = "name")
-	private String name;
-	@Column(name = "place")
-	private String place;
-	@Column(name = "since")
-	private int since;
-	@Column(name = "noOfStudents")
-	private int noOfStudents;
 
 }

@@ -1,19 +1,16 @@
-package com.xworkz.hostel.repository;
+package com.xworkz.metroproject.repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import com.xworkz.hostel.entity.HostelEntity;
+import com.xworkz.metroproject.entity.MetroEntity;
 
-import lombok.NoArgsConstructor;
-@NoArgsConstructor
-public class HostelRepositoryImpl implements HostelRepository {
+public class MetroRepositoryImpl implements MetroRepository {
 
 	@Override
-	public boolean create(HostelEntity entity) {
-		System.out.println("Running create method ");
+	public boolean create(MetroEntity entity) {
 
 		EntityManagerFactory createEntityManagerFactory = Persistence.createEntityManagerFactory("com.xworkz");
 		System.out.println(createEntityManagerFactory);
@@ -23,7 +20,6 @@ public class HostelRepositoryImpl implements HostelRepository {
 		entityManager.persist(entity);
 		transaction.commit();
 		entityManager.close();
-
 		return true;
 	}
 
