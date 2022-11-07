@@ -23,14 +23,25 @@ public class HumanRunner {
 
 		HumanRepository repository = new HumanRepositoryImpl();
 		HumanService service = new HumanServiceImpl(repository);
-		service.validateAndSave(entity1);
-		service.validateAndSave(entity2);
-		service.validateAndSave(entity3);
-		
+//		service.validateAndSave(entity1);
+//		service.validateAndSave(entity2);
+//		service.validateAndSave(entity3);
+
 		System.out.println("=====================================================");
 
 		Optional<HumanEntity> entity = service.findById(3);
-		//System.out.println(entity);
+		if (entity.isPresent()) {
+			System.out.println("id is found  ");
+			entity.isPresent();
+		} else {
+			System.err.println("id is null");
+		}
+		// System.out.println(entity);S
+		System.out.println("=====================================================");
+		service.updateByName(3, "Dadasaheba");
+
+		System.out.println("=====================================================");
+		service.deleteById(3);
 
 	}
 

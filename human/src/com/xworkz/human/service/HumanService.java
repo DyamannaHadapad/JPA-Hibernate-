@@ -8,4 +8,8 @@ public interface HumanService {
 	boolean validateAndSave(HumanEntity entity);
 
 	Optional<HumanEntity> findById(int id);
+
+	void updateByName(int id, String name);
+
+	void deleteById(int id);
 }

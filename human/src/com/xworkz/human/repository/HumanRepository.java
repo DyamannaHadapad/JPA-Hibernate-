@@ -10,4 +10,8 @@ public interface HumanRepository {
 
 	Optional<HumanEntity> findById(int id);
 
+	void updateByName(int id, String name);
+
+	void deleteById(int id);
+
 }

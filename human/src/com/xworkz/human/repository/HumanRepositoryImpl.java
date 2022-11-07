@@ -5,7 +5,7 @@ import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.transaction.Transaction;
 
 import com.xworkz.human.entiy.HumanEntity;
 import com.xworkz.human.util.HumanUtil;
@@ -13,27 +13,26 @@ import com.xworkz.human.util.HumanUtil;
 public class HumanRepositoryImpl implements HumanRepository {
 
 	EntityManagerFactory factory = HumanUtil.getFactory();
-	private EntityManager manager = null;
 
 	@Override
-	public boolean create(HumanEntity etity) {
+	public boolean create(HumanEntity entity) {
 		try {
-			manager = factory.createEntityManager();
+			EntityManager manager = this.factory.createEntityManager();
 			EntityTransaction transaction = manager.getTransaction();
 			transaction.begin();
-			manager.persist(etity);
+			manager.persist(entity);
 			transaction.commit();
+			manager.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			manager.close();
 		}
+
 		return true;
 	}
 
 	@Override
 	public Optional<HumanEntity> findById(int id) {
-		manager = factory.createEntityManager();
+		EntityManager manager = this.factory.createEntityManager();
 		HumanEntity entity = manager.find(HumanEntity.class, id);
 		if (entity != null) {
 			System.out.println("Entity found in table   :" + entity);
@@ -42,6 +41,43 @@ public class HumanRepositoryImpl implements HumanRepository {
 			System.err.println("Entity is not found  :" + id);
 		}
 		return Optional.empty();
+	}
+
+	@Override
+	public void updateByName(int id, String name) {
+		EntityManager entityManager = this.factory.createEntityManager();
+		EntityTransaction transaction = entityManager.getTransaction();
+		transaction.begin();
+		HumanEntity entity = entityManager.find(HumanEntity.class, id);
+		if (entity != null) {
+			entity.setName(name);
+			entityManager.merge(entity);
+			System.out.println("Entity found  ,can update   :" + id);
+		} else {
+			System.err.println("Entity is not found,not update ");
+
+		}
+		transaction.commit();
+		entityManager.close();
+
+	}
+
+	@Override
+	public void deleteById(int id) {
+		EntityManager entityManager = this.factory.createEntityManager();
+		EntityTransaction transaction = entityManager.getTransaction();
+		transaction.begin();
+		HumanEntity entity = entityManager.find(HumanEntity.class, id);
+		if (entity != null) {
+
+			System.out.println("Entity is removed from table   :" + id);
+			entityManager.remove(entity);
+
+		} else {
+			System.err.println("Entity is not found....");
+		}
+		transaction.commit();
+		entityManager.close();
 	}
 
 }

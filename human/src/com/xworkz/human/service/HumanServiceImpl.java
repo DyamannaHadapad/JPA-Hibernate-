@@ -48,7 +48,7 @@ public class HumanServiceImpl implements HumanService {
 											if (married == false) {
 												System.out.println("married is valid");
 												this.repository.create(entity);
-												//System.out.println("Saved data  :" + entity);
+												// System.out.println("Saved data :" + entity);
 											} else {
 												System.err.println("married is invalid");
 											}
@@ -90,5 +90,17 @@ public class HumanServiceImpl implements HumanService {
 			return this.repository.findById(id);
 		}
 		return Optional.empty();
+	}
+
+	@Override
+	public void updateByName(int id, String name) {
+		this.repository.updateByName(id, name);
+	}
+	
+	@Override
+	public void deleteById(int id) {
+	
+		this.repository.deleteById(id);
+		
 	}
 }
