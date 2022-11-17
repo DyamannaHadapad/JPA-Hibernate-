@@ -5,7 +5,6 @@ import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-
 import com.xworkz.postoffice.entity.PostOfficeEntity;
 import com.xworkz.postoffice.util.PostOfficeUtil;
 
@@ -18,7 +17,7 @@ public class PostOfficeRepositoryImpl implements PostOfficeRepository {
 		EntityManager entityManager = this.factory.createEntityManager();
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
-		entityManager.persist(entity);
+		entityManager.persist(entity);		
 		transaction.commit();
 		return true;
 	}
@@ -63,12 +62,14 @@ public class PostOfficeRepositoryImpl implements PostOfficeRepository {
 		PostOfficeEntity officeEntity = entityManager.find(PostOfficeEntity.class, id);
 		if (officeEntity != null) {
 			System.out.println("Entity found ,delete table..." + id);
-		} else {
-			System.err.println("Not found");
-		}
-		entityManager.remove(officeEntity);
-		transaction.commit();
+			entityManager.remove(officeEntity);
+			transaction.commit();
 
+		} else {
+			System.err.println("Not found...........");
+		}
+		
+		
 	}
 
 }

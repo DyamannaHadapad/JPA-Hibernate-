@@ -17,6 +17,7 @@ public class PostOfficeRunner {
 			PostOfficeEntity entity = new PostOfficeEntity(1, "Guledgudda", "Gld", 30, 9.0, 2.0);
 			PostOfficeEntity entity1 = new PostOfficeEntity(2, "Bagalkot", "Bgk", 30, 9.0, 2.0);
 			PostOfficeEntity entity2 = new PostOfficeEntity(3, "Badami", "Bdm", 30, 9.0, 2.0);
+			PostOfficeEntity entity3 = new PostOfficeEntity(4, "Badami", "Bdm", 30, 9.0, 2.0);
 
 			PostOfficeRepository repository = new PostOfficeRepositoryImpl();
 
@@ -24,13 +25,15 @@ public class PostOfficeRunner {
 //		service.validateAndSave(entity);
 //		service.validateAndSave(entity1);
 //		service.validateAndSave(entity2);
+	//		service.validateAndSave(entity3);
 
 			System.out.println("==============================================================");
 
 			Optional<PostOfficeEntity> findById = service.findById(1);
 			if (findById.isPresent()) {
 				System.out.println("Id is present...");
-				findById.isPresent();
+				PostOfficeEntity postOfficeEntity = findById.get();
+				System.out.println(postOfficeEntity);
 			} else {
 				System.out.println("Id is not present...");
 			}
@@ -41,7 +44,9 @@ public class PostOfficeRunner {
 
 			System.out.println("==============================================================");
 
-			service.deleteById(3);
+			service.deleteById(2);
+			
+			
 		} finally {
 			PostOfficeUtil.getFactory().close();
 		}
