@@ -1,5 +1,6 @@
 package com.xworkz.goldjewellery.service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -84,5 +85,53 @@ public class GoldJewelleryServiceImpl implements GoldJewelleryService {
 	@Override
 	public Optional<Double> findTotalPriceByGramAndShopName(double grams, String shopName) {
 		return this.repository.findTotalPriceByGramAndShopName(grams, shopName);
+	}
+
+	@Override
+	public Collection<GoldJewelleryEntity> getAll() {
+
+		return this.repository.getAll();
+	}
+
+	@Override
+	public Collection<String> getAllShopName() {
+		return this.repository.getAllShopName();
+	}
+
+	@Override
+	public Collection<Object[]> getAllShopNameAndType() {
+		return this.repository.getAllShopNameAndType();
+	}
+
+	@Override
+	public Optional<Collection<GoldJewelleryEntity>> findAllByMakingChargesGreaterThan(double charges) {
+		return this.repository.findAllByMakingChargesGreaterThan(charges);
+	}
+
+	@Override
+	public Optional<Collection<GoldJewelleryEntity>> findAllByWasteageChargesLessThan(double charges) {
+		return this.repository.findAllByWasteageChargesLessThan(charges);
+	}
+
+	@Override
+	public Optional<Collection<GoldJewelleryEntity>> findAllByWasteageChargesGreaterThanAndMakingChargesGreaterThan(
+			double wasteAgecharges, double makingCharges) {
+		return this.repository.findAllByWasteageChargesGreaterThanAndMakingChargesGreaterThan(wasteAgecharges,
+				makingCharges);
+	}
+
+	@Override
+	public Optional<Collection<GoldJewelleryEntity>> findAll() {
+		return this.repository.findAll();
+	}
+
+	@Override
+	public Optional<GoldJewelleryEntity> displayByShopName(String name) {
+		return this.repository.displayByShopName(name);
+	}
+
+	@Override
+	public Collection<GoldJewelleryEntity> allItems() {
+		return this.repository.allItems();
 	}
 }

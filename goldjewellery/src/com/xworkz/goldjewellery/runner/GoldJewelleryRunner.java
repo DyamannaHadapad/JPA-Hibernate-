@@ -1,6 +1,7 @@
 package com.xworkz.goldjewellery.runner;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -85,6 +86,74 @@ public class GoldJewelleryRunner {
 			}
 
 			System.out.println("==============================================================");
+
+			Collection<GoldJewelleryEntity> all = service.getAll();
+			all.forEach(ref -> System.out.println(ref));
+
+			System.out.println("==============================================================");
+
+			Collection<String> allShop = service.getAllShopName();
+			allShop.forEach(ref -> System.out.println(ref));
+
+			System.out.println("==============================================================");
+
+			Collection<Object[]> allShopAndType = service.getAllShopNameAndType();
+			for (Object[] objects : allShopAndType) {
+				for (int i = 0; i < objects.length; i++) {
+					System.out.println(objects[i]);
+				}
+
+			}
+
+			System.out.println("==============================================================");
+
+			Optional<Collection<GoldJewelleryEntity>> findAllByMakingChargesGreaterThan = service
+					.findAllByMakingChargesGreaterThan(1600.00);
+			if (findAllByMakingChargesGreaterThan.isPresent()) {
+				System.out.println(findAllByMakingChargesGreaterThan.get());
+
+			}
+
+			System.out.println("==============================================================");
+
+			Optional<Collection<GoldJewelleryEntity>> findAllByWasteageChargesLessThan = service
+					.findAllByWasteageChargesLessThan(0.5);
+			if (findAllByWasteageChargesLessThan.isPresent()) {
+				System.out.println(findAllByWasteageChargesLessThan.get());
+
+			}
+
+			System.out.println("==============================================================");
+
+			Optional<Collection<GoldJewelleryEntity>> findAllByWasteageChargesGreaterThanAndMakingChargesGreaterThan = service
+					.findAllByWasteageChargesGreaterThanAndMakingChargesGreaterThan(0.6, 1100);
+			if (findAllByWasteageChargesGreaterThanAndMakingChargesGreaterThan.isPresent()) {
+				System.out.println(findAllByWasteageChargesGreaterThanAndMakingChargesGreaterThan.get());
+
+			}
+
+			System.out.println("==============================================================");
+
+			Optional<Collection<GoldJewelleryEntity>> findAll = service.findAll();
+			if (findAll.isPresent()) {
+				Collection<GoldJewelleryEntity> collection = findAll.get();
+				System.out.println(collection);
+
+			}
+
+			System.out.println("==============================================================");
+
+			Optional<GoldJewelleryEntity> displayByShopName = service.displayByShopName("smitha Jewellerys");
+			if (displayByShopName.isPresent()) {
+				  GoldJewelleryEntity jewelleryEntity = displayByShopName.get();
+				System.out.println(jewelleryEntity);
+
+			}
+
+			System.out.println("==============================================================");
+
+			Collection<GoldJewelleryEntity> allItems = service.allItems();
+			System.out.println(allItems);
 
 		} finally {
 			GoldJewelleryUtil.getFactory().close();

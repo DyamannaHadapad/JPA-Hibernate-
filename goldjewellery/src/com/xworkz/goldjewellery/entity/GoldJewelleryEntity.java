@@ -6,6 +6,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.DecimalMin;
@@ -25,8 +26,16 @@ import lombok.NoArgsConstructor;
 @NamedQuery(name = "findByShopNameAndId", query = "select gold from GoldJewelleryEntity gold where gold.shopName=:shop and gold.id=:time")
 @NamedQuery(name = "findShopNameByid", query = "select gold.shopName from GoldJewelleryEntity gold where gold.id=:time")
 @NamedQuery(name = "findMakingChargesByShopName", query = "select gold.makingCharges from GoldJewelleryEntity gold where gold.shopName=:shop")
-@NamedQuery(name = "findMakingChargesAndWastageChargesByShopName",query = "select gold.makingCharges,gold.wastageCharges from GoldJewelleryEntity gold where gold.shopName=:shop")
-@NamedQuery(name = "findTotalPriceByGramAndShopName",query = "select sum(goldPrice+gstPrice+makingCharges+wastageCharges)from GoldJewelleryEntity gold where gold.grams=:gr and gold.shopName=:shop")
+@NamedQuery(name = "findMakingChargesAndWastageChargesByShopName", query = "select gold.makingCharges,gold.wastageCharges from GoldJewelleryEntity gold where gold.shopName=:shop")
+@NamedQuery(name = "findTotalPriceByGramAndShopName", query = "select sum(goldPrice+gstPrice+makingCharges+wastageCharges)from GoldJewelleryEntity gold where gold.grams=:gr and gold.shopName=:shop")
+@NamedQuery(name = "getAll", query = "select gold from GoldJewelleryEntity gold")
+@NamedQuery(name = "getAllShopName", query = "select gold.shopName from GoldJewelleryEntity gold")
+@NamedQuery(name = "getAllShopNameAndType", query = "select gold.shopName,gold.type from GoldJewelleryEntity gold")
+@NamedQuery(name = "findAllByMakingChargesGreaterThan", query = "select gold from GoldJewelleryEntity gold where gold.makingCharges>:ch")
+@NamedQuery(name = "findAllByWasteageChargesLessThan", query = "select gold from GoldJewelleryEntity gold where gold.wastageCharges<:ch")
+@NamedQuery(name = "findAllByWasteageChargesGreaterThanAndMakingChargesGreaterThan", query = "select gold from GoldJewelleryEntity gold where gold.wastageCharges>:wa and gold.makingCharges>:mk")
+@NamedNativeQuery(name = "findAll", query = "select * from gold_jewellery", resultClass = GoldJewelleryEntity.class)
+@NamedNativeQuery(name = "displayByShopName", query = "select * from gold_jewellery where shopName=:shop", resultClass = GoldJewelleryEntity.class)
 public class GoldJewelleryEntity {
 
 	@Id
